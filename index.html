@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Quiz</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header>
+        <!-- find out if i can put all into one html -->
+        <div class="highscore"> View High Scores</div>
+        <div class="timer"> Seconds Left: <span id="time">60</span></div>
+    </header>
+    <section class="howto">
+        <div class="howto-box">
+        <h1 class="howto">Coding Quiz using Web APIs</h1>
+        <p class="howto">Answer the following questions within 1 minute!
+            <br>You will be penalized 10 seconds for any incorrect answer.
+            <br>Your final score will be what time is remaining.
+        </p>
+        </div>
+        </section>
+        <section class="button-control">
+            <button type="button" id="beginButton">Click here to begin!</button>
+        </section>
+    <main>
+        <section class="questions">
+                <p class="question"> </p>
+                <br>
+                <div class="choiceanswers">
+                    <!-- update to ul and li and use screenshot from today on desktop -->
+                    <button class="choiceanswer" id="a1"></button>
+                    <button class="choiceanswer" id="a2"></button>
+                    <button class="choiceanswer" id="a3"></button>
+                    <button class="choiceanswer" id="a4"></button>
+                </div>
+                    <div class="endgame">
+                    <div>
+                        <p class="scorefinal"></p>
+                    </div>
+            </div>
+        </section>
+        <section class="highscore-html">
+            Enter your initals to submit your highscore! <input type="text" name="initals" id="initals">
+        <p>
+            <!-- check this  -->
+            <input type="submit" class="submit" onclick="restartGame()">
+        </p>
+            </section>
+        <section class="highscoresFinal">
+
+        <div>
+                <p class="results"></p>
+                <div><h1>High Scores! Where do you rank?</h1>
+                </div>
+                <div>
+                    <ol class="score-list"></ol>
+                </div>
+        </div>
+    </section>
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
