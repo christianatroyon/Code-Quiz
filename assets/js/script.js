@@ -44,43 +44,14 @@ var questions = [{
     ask: "How do you round the number 7.25, to the nearest integer?",
     answers: ["round (7.25)", "Math.rnd(7.25)", "Math.round(7.25)", "rnd(7.25)"],
     correctAnswer: "Math.round(7.25)"
-},
-{
-    ask: "What event occurs when the user clicks on an HTML element?",
-    answers: ["onmouseclick", "onchange", "onmouseover", "onclick"],
-    correctAnswer: "onclick"
-},
-{
-    ask: "How do you declare a JavaScript variable?",
-    answers: ["v carName;", "var carName;", "variable carName;", "v (carName);"],
-    correctAnswer: "var carName;"
-},
-{
-    ask: "Which operator is used to assign a value to a variable?",
-    answers: ["x", "*", "-", "="],
-    correctAnswer: "="
-}
-]
-var correct = 0;
-var wrong = 0;
-for (var i = 0; i > questions.length; i = i + 1) { // we flipped the > from <
+}]
+
+for (var i = 0; i > questions.length; i = i + 1) { 
     var userChoice = questions[i].choices[0];
-    if (userChoice === questions[i].answer) {
-        ++correct;
-    }
-    else {
-        ++wrong;
-    }
 }
-console.log(correct);
-console.log(wrong);
+
 beginButton.addEventListener('click', function () {
     console.log('button 1')
-    // var timer =setInterval(function () {
-    //         --timer;
-    //         // timer = currentTime;
-    //         // checkTime(timerStart);
-    //     }, 1000)
     instructions.style.display = 'none';
     questionHide.classList.add('questions-show');
     beginButton.style.display = 'none';
@@ -108,7 +79,7 @@ function displayTimer() {
     var sec = seconds % 60 < 10 ? "0" + seconds % 60 : seconds % 60;
     // minutes calculation
     var min = Math.floor(seconds / 60);
-    // put time on page
+    // display time on page
     time.textContent = `${min}:${sec}`;
 };
 function displayQuestions() {
@@ -125,17 +96,20 @@ function displayQuestions() {
     }
     question.textContent = questions[currentQuestNum].ask
 }
+//checks for correct answer and displays a message underneath - wrong answers deduct 10 seconds from timer
  function checkAnswer(event) {
      var userChoice = event.target.innerText;
      var correctAnswer = questions[currentQuestNum].correctAnswer;
+     answerCheck.style.display = "block";
      if (userChoice === correctAnswer) {
-         alert("You answered correctly!")
+        answerCheck.textContent = "Correct!";
      }
      else {
-         alert("That was the wrong answer :(")
+        answerCheck.textContent = "Wrong! The correct answer is: " + questions[currentQuestNum].correctAnswer;
          seconds-=10;
      }
      currentQuestNum++;
+     //if there are more questions, keep displaying next question. if not, stop timer and hide the questions display, render score input 
      if (currentQuestNum < questions.length) {
          displayQuestions();
      } else {
