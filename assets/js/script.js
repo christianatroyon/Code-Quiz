@@ -1,10 +1,9 @@
 
 var time = document.querySelector('#time')
-var instructions = document.querySelector('.howto');
+var startScreen = document.querySelector('.howto');
 var timerInterval = '60';
-var start = document.querySelector('#beginButton')
 var questionHide = document.querySelector('.questions')
-var currentQuestNum = 0;
+var currentQuestion = 0;
 var questions = [{
     ask: "Inside which HTML element do we put the JavaScript?",
     answers: ["<script>", "<javascript>", "<js>", "<scripting>"],
@@ -49,22 +48,21 @@ var questions = [{
 for (var i = 0; i > questions.length; i = i + 1) { 
     var userChoice = questions[i].choices[0];
 }
-
+//starts the game when the user hits the start button
 beginButton.addEventListener('click', function () {
-    console.log('button 1')
-    instructions.style.display = 'none';
+    startScreen.style.display = 'none';
     questionHide.classList.add('questions-show');
     beginButton.style.display = 'none';
     return startGame();
 })
 //timer code
 function startGame() {
-    // important to clear out previous interval before starting a new one
     clearInterval(timerInterval);
     seconds = 60;
     timerInterval = setInterval(function () {
         console.log(--seconds);
         displayTimer();
+        //game ends when timer hits 0
         if (seconds <= 0) {
             clearInterval(timerInterval);
             questionHide.style.display = 'none';
@@ -86,31 +84,31 @@ function displayQuestions() {
     var answerTags = document.querySelectorAll('#a1, #a2, #a3, #a4')
     var question = document.querySelector('.question');
     for (var i = 0; i < 4; i++) {
-        answerTags[i].textContent = questions[currentQuestNum].answers[i]
-        if (i === questions[currentQuestNum].correctAnswer) {
+        answerTags[i].textContent = questions[currentQuestion].answers[i]
+        if (i === questions[currentQuestion].correctAnswer) {
             answerTags[i].setAttribute('data-Correct', true)
         } else {
             answerTags[i].setAttribute('data-Correct', false)
         }
         answerTags[i].addEventListener("click", checkAnswer);
     }
-    question.textContent = questions[currentQuestNum].ask
+    question.textContent = questions[currentQuestion].ask
 }
 //checks for correct answer and displays a message underneath - wrong answers deduct 10 seconds from timer
  function checkAnswer(event) {
      var userChoice = event.target.innerText;
-     var correctAnswer = questions[currentQuestNum].correctAnswer;
+     var correctAnswer = questions[currentQuestion].correctAnswer;
      answerCheck.style.display = "block";
      if (userChoice === correctAnswer) {
         answerCheck.textContent = "Correct!";
      }
      else {
-        answerCheck.textContent = "Wrong! The correct answer is: " + questions[currentQuestNum].correctAnswer;
+        answerCheck.textContent = "Wrong! The correct answer is: " + questions[currentQuestion].correctAnswer;
          seconds-=10;
      }
-     currentQuestNum++;
+     currentQuestion++;
      //if there are more questions, keep displaying next question. if not, stop timer and hide the questions display, render score input 
-     if (currentQuestNum < questions.length) {
+     if (currentQuestion < questions.length) {
          displayQuestions();
      } else {
         clearInterval(timerInterval);
